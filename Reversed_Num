@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+#include<string>
+const int maxsize = 100;
+class stack
+{
+    int top;
+    char arr[maxsize];
+public:
+    stack()
+    {
+        top = -1;
+    }
+    void push(int c)
+    {
+        if (top>=maxsize)
+        {
+            cout << "stack is full\n";
+        }
+        else                            //function push
+        {
+            top++;
+            arr[top] = c;
+        }
+    }
+    void pop()
+    {
+
+        if (top == -1)
+        {
+            cout << "stack is empty\n";
+        }
+        else                        //function pop
+        {
+            top--;
+        }
+    }
+    bool isempty()
+    {
+        return top == -1;
+    }
+    int reverse_num(int num)
+    {
+        while (num != 0)
+        {
+            int n = num % 10;
+            push(n + '0'); //convert to char berfore adding
+            num = num / 10;
+        }
+        int reversed_num = 0;
+        int value = 1;
+        while (!isempty()) {
+            char digit = arr[top];
+            pop();
+            reversed_num += (digit - '0') * value; // Convert char to int before adding
+            value *= 10;
+        }
+        return reversed_num;
+    }
+
+
+};
+
+
+int main()
+{
+    stack s;
+    int num = 1234;
+    cout << s.reverse_num(num) << endl;
+
+}
